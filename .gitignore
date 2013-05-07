@@ -1,0 +1,8 @@
+chars/
+stages/
+menu/
+misc/
+*.dll
+config.xml
+launcher.xml
+log
