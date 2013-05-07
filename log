@@ -1,0 +1,24 @@
+1 joystick was found.
+Joystick for player 1 initialized succesfully.
+Success! SDL initialized.
+Initializing SLD sound engine.
+Success!
+misc/loading_screen.png loaded
+menu/startscreen.png loaded
+menu/button1.png loaded
+menu/button1.png loaded
+Playing music: menu/audio/music.ogg
+misc/loading_screen.png loaded
+menu/selection_bg.png loaded
+chars/Iguro/portrait.png loaded
+chars/Iguro/preview.png loaded
+chars/Iguro/portrait.png loaded
+chars/Iguro/preview.png loaded
+chars/Iguro/portrait.png loaded
+chars/Iguro/preview.png loaded
+menu/selected_char_p1.png loaded
+menu/locked_char_p1.png loaded
+menu/no_portrait.png loaded
+stages/FeministKillBot_normal/images/preview.png loaded
+stages/FeministKillBot_normal/images/preview.png loaded
+stages/FeministKillBot_normal/images/preview.png loaded

@@ -1,0 +1,51 @@
+<ModifiersFile>
+	<!-- <Modifier at="1" iterator="5050" /> -->
+
+	<Modifier at="100" pattern_type="Crazy eyes1"/>
+	<Modifier at="500" pattern_type="Crazy eyes2"/>
+	<Modifier at="1000" pattern_type="Crazy eyes3"/>
+	<Modifier at="1500" pattern_type="Crazy eyes3"/>
+	<Modifier at="2000" pattern_type=""/>
+
+	<Modifier at="2030" velocity="5" angle="-90"/>
+
+	<Modifier at="2100" pattern_type="Rockets1" velocity="5" angle="90"/>
+	<Modifier at="2200" angle="-90"/>
+	<Modifier at="2300" angle="90"/>
+	<Modifier at="2400" angle="-90"/>
+	<Modifier at="2500" angle="90"/>
+	<Modifier at="2600" angle="-90"/>
+	<Modifier at="2700" angle="90"/>
+	<Modifier at="2800" angle="-90"/>
+	<Modifier at="2900" angle="90"/>
+	<Modifier at="3000" angle="-90"/>
+	<Modifier at="3100" pattern_type="Rockets2" angle="90"/>
+	<Modifier at="3200" angle="-90"/>
+	<Modifier at="3300" angle="90"/>
+	<Modifier at="3400" angle="-90"/>
+	<Modifier at="3500" angle="90"/>
+	<Modifier at="3600" angle="-90"/>
+	<Modifier at="3700" angle="90"/>
+	<Modifier at="3800" angle="-90"/>
+	<Modifier at="3900" angle="90"/>
+	<Modifier at="4000" angle="-90"/>
+	<Modifier at="4100" pattern_type="Rockets3" angle="90"/>
+	<Modifier at="4200" angle="-90"/>
+	<Modifier at="4300" angle="90"/>
+	<Modifier at="4400" angle="-90"/>
+	<Modifier at="4500" angle="90"/>
+	<Modifier at="4600" angle="-90"/>
+	<Modifier at="4700" angle="90"/>
+	<Modifier at="4800" angle="-90"/>
+	<Modifier at="4900" angle="90"/>
+	<Modifier at="5000" velocity="2" angle="0" pattern_type=""/>
+
+	<Modifier at="5050" velocity="2" angle="-90" pattern_type=""/>
+	<Modifier at="5100" velocity="0" pattern_type="Feminist Laser"/>
+	<Modifier at="5300" velocity="0" pattern_type="Las Vegas"/>
+	<Modifier at="5800" velocity="2" angle="-90" pattern_type=""/>
+	<Modifier at="5850" velocity="0" pattern_type="Feminist Laser"/>
+	<Modifier at="6050" velocity="0" pattern_type="Las Vegas"/>
+	<Modifier at="6550" velocity="2" angle="90" pattern_type=""/>
+	<Modifier at="6600" iterator="5099"/>
+</ModifiersFile>

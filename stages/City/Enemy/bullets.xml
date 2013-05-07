@@ -1,0 +1,12 @@
+<BulletsFile>
+	<Bullet name="basic bullet" damage="2">
+		<Sprite path="basic bullet.png"/>
+		<Hitbox x="-10" y="-10" width="20" height="20" angle="0"/>
+		<OnHit>
+			<Sprite path="kajira/1.png"/>
+			<Sprite path="kajira/2.png"/>
+			<Sprite path="kajira/3.png"/>
+			<Sprite path="kajira/4.png"/>
+		</OnHit>
+	</Bullet>
+</BulletsFile>

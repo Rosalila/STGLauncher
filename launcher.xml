@@ -1,0 +1,77 @@
+<Launcher>
+	<Version version="1"/>
+	<Notice>Hello world! The project news will be displayed here. Chuck testa</Notice>
+	<Stages>
+		<stage name="FeministKillBot_normal"/>
+		<stage name="FeministKillBot_hard"/>
+	</Stages>
+	<Chars>
+		<char name="Iguro"/>
+	</Chars>
+	<Files>
+		<file path="launcher.xml"/>
+		<file path="lib/appframework-1.0.3.jar"/>
+		<file path="config.xml"/>
+
+		<file path="menu/button1.png"/>
+		<file path="menu/button2.png"/>
+		<file path="menu/locked_char_p1.png"/>
+		<file path="menu/main_menu.svg"/>
+		<file path="menu/no_portrait.png"/>
+		<file path="menu/selected_char_p1.png"/>
+		<file path="menu/selection_bg.png"/>
+		<file path="menu/selection_menu.svg"/>
+		<file path="menu/startscreen.png"/>
+
+		<file path="menu/audio/back.ogg"/>
+		<file path="menu/audio/move.ogg"/>
+		<file path="menu/audio/move_char.ogg"/>
+		<file path="menu/audio/music.ogg"/>
+		<file path="menu/audio/select.ogg"/>
+		<file path="menu/audio/select_char.ogg"/>
+
+		<file path="misc/font.ttf"/>
+		<file path="misc/loading_screen.png"/>
+
+		<file path="misc/you loose/1.png"/>
+		<file path="misc/you loose/2.png"/>
+		<file path="misc/you loose/3.png"/>
+		<file path="misc/you loose/4.png"/>
+		<file path="misc/you loose/5.png"/>
+		<file path="misc/you loose/6.png"/>
+
+		<file path="misc/you win/1.png"/>
+		<file path="misc/you win/2.png"/>
+		<file path="misc/you win/3.png"/>
+		<file path="misc/you win/4.png"/>
+		<file path="misc/you win/5.png"/>
+		<file path="misc/you win/6.png"/>
+
+		<Linux64 path="STG64"/>
+		<Linux64 path="STGLauncher_64.jar"/>
+		<Linux64 path="STGLauncher_64.sh"/>
+
+		<Linux32 path="STG32"/>
+		<Linux32 path="STGLauncher_32.jar"/>
+		<Linux32 path="STGLauncher_32.sh"/>
+
+		<Windows path="STG.exe"/>
+		<Windows path="STGLauncher_windows.jar"/>
+		<Windows path="freeglut.dll"/>
+		<Windows path="libFLAC-8.dll"/>
+		<Windows path="libfreetype-6.dll"/>
+		<Windows path="libgcc_s_dw2-1.dll"/>
+		<Windows path="libmikmod-2.dll"/>
+		<Windows path="libogg-0.dll"/>
+		<Windows path="libpng15-15.dll"/>
+		<Windows path="libstdc++-6.dll"/>
+		<Windows path="libvorbis-0.dll"/>
+		<Windows path="libvorbisfile-3.dll"/>
+		<Windows path="SDL.dll"/>
+		<Windows path="SDL_image.dll"/>
+		<Windows path="SDL_mixer.dll"/>
+		<Windows path="SDL_ttf.dll"/>
+		<Windows path="smpeg.dll"/>
+		<Windows path="zlib1.dll"/>
+	</Files>
+</Launcher>
