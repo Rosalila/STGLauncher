@@ -5,5 +5,5 @@ misc/
 *.dll
 config.xml
 launcher.xml
-stages_previews/
+stage_previews/
 log
