@@ -96,6 +96,22 @@ public class STGLauncherView extends FrameView {
         if(config_test.exists())
         {
             is_game_downloaded=true;
+            try
+            {
+                //Update config in memory
+                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                Document config_doc = docBuilder.parse (new File("config.xml"));
+                config_doc.getDocumentElement ().normalize ();
+
+                NodeList user_node_list = config_doc.getElementsByTagName("User");
+                Element user_element = (Element)user_node_list.item(0);
+                
+                txt_username.setText(user_element.getAttribute("name"));
+            }catch(Exception e)
+            {
+                
+            }
         }
         
         if(!is_game_downloaded)
@@ -134,6 +150,13 @@ public class STGLauncherView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        panel_top = new javax.swing.JPanel();
+        btn_start = new javax.swing.JButton();
+        btn_patch = new javax.swing.JButton();
+        pbar_download = new javax.swing.JProgressBar();
+        txt_notice = new javax.swing.JLabel();
+        ip_top_banner = new ImagePanel();
+        txt_info = new javax.swing.JLabel();
         panel_stages = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         list_stages = new javax.swing.JList();
@@ -142,13 +165,8 @@ public class STGLauncherView extends FrameView {
         btn_update_stage = new javax.swing.JButton();
         btn_delete_stage = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        panel_top = new javax.swing.JPanel();
-        btn_start = new javax.swing.JButton();
-        btn_patch = new javax.swing.JButton();
-        pbar_download = new javax.swing.JProgressBar();
-        txt_notice = new javax.swing.JLabel();
-        ip_top_banner = new ImagePanel();
-        txt_info = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_username = new javax.swing.JTextField();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -156,6 +174,49 @@ public class STGLauncherView extends FrameView {
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
 
         mainPanel.setName("mainPanel"); // NOI18N
+
+        panel_top.setName("panel_top"); // NOI18N
+
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(stglauncher.STGLauncherApp.class).getContext().getResourceMap(STGLauncherView.class);
+        btn_start.setText(resourceMap.getString("btn_start.text")); // NOI18N
+        btn_start.setName("btn_start"); // NOI18N
+        btn_start.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_startMousePressed(evt);
+            }
+        });
+
+        btn_patch.setText(resourceMap.getString("btn_patch.text")); // NOI18N
+        btn_patch.setMaximumSize(new java.awt.Dimension(75, 25));
+        btn_patch.setMinimumSize(new java.awt.Dimension(75, 25));
+        btn_patch.setName("btn_patch"); // NOI18N
+        btn_patch.setPreferredSize(new java.awt.Dimension(75, 25));
+        btn_patch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btn_patchMousePressed(evt);
+            }
+        });
+
+        pbar_download.setName("pbar_download"); // NOI18N
+
+        txt_notice.setText(resourceMap.getString("txt_notice.text")); // NOI18N
+        txt_notice.setName("txt_notice"); // NOI18N
+
+        ip_top_banner.setName("ip_top_banner"); // NOI18N
+
+        javax.swing.GroupLayout ip_top_bannerLayout = new javax.swing.GroupLayout(ip_top_banner);
+        ip_top_banner.setLayout(ip_top_bannerLayout);
+        ip_top_bannerLayout.setHorizontalGroup(
+            ip_top_bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1184, Short.MAX_VALUE)
+        );
+        ip_top_bannerLayout.setVerticalGroup(
+            ip_top_bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        txt_info.setText(resourceMap.getString("txt_info.text")); // NOI18N
+        txt_info.setName("txt_info"); // NOI18N
 
         panel_stages.setName("panel_stages"); // NOI18N
 
@@ -175,14 +236,13 @@ public class STGLauncherView extends FrameView {
         ip_stage_preview.setLayout(ip_stage_previewLayout);
         ip_stage_previewLayout.setHorizontalGroup(
             ip_stage_previewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 435, Short.MAX_VALUE)
+            .addGap(0, 302, Short.MAX_VALUE)
         );
         ip_stage_previewLayout.setVerticalGroup(
             ip_stage_previewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(stglauncher.STGLauncherApp.class).getContext().getResourceMap(STGLauncherView.class);
         btn_download_stage.setText(resourceMap.getString("btn_download_stage.text")); // NOI18N
         btn_download_stage.setName("btn_download_stage"); // NOI18N
         btn_download_stage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -221,16 +281,18 @@ public class STGLauncherView extends FrameView {
                     .addComponent(jLabel1)
                     .addGroup(panel_stagesLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_stagesLayout.createSequentialGroup()
+                        .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_stagesLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
                                 .addComponent(btn_download_stage)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_update_stage)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_delete_stage))
-                            .addComponent(ip_stage_preview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                            .addGroup(panel_stagesLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(ip_stage_preview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         panel_stagesLayout.setVerticalGroup(
             panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,59 +300,45 @@ public class STGLauncherView extends FrameView {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panel_stagesLayout.createSequentialGroup()
                         .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_download_stage)
                             .addComponent(btn_update_stage)
                             .addComponent(btn_delete_stage))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ip_stage_preview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(ip_stage_preview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panel_top.setName("panel_top"); // NOI18N
+        jLabel2.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
 
-        btn_start.setText(resourceMap.getString("btn_start.text")); // NOI18N
-        btn_start.setName("btn_start"); // NOI18N
-        btn_start.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_startMousePressed(evt);
+        txt_username.setFont(resourceMap.getFont("txt_username.font")); // NOI18N
+        txt_username.setText(resourceMap.getString("txt_username.text")); // NOI18N
+        txt_username.setName("txt_username"); // NOI18N
+        txt_username.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txt_usernameInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
-
-        btn_patch.setText(resourceMap.getString("btn_patch.text")); // NOI18N
-        btn_patch.setMaximumSize(new java.awt.Dimension(75, 25));
-        btn_patch.setMinimumSize(new java.awt.Dimension(75, 25));
-        btn_patch.setName("btn_patch"); // NOI18N
-        btn_patch.setPreferredSize(new java.awt.Dimension(75, 25));
-        btn_patch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_patchMousePressed(evt);
+        txt_username.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txt_usernamePropertyChange(evt);
             }
         });
-
-        pbar_download.setName("pbar_download"); // NOI18N
-
-        txt_notice.setText(resourceMap.getString("txt_notice.text")); // NOI18N
-        txt_notice.setName("txt_notice"); // NOI18N
-
-        ip_top_banner.setName("ip_top_banner"); // NOI18N
-
-        javax.swing.GroupLayout ip_top_bannerLayout = new javax.swing.GroupLayout(ip_top_banner);
-        ip_top_banner.setLayout(ip_top_bannerLayout);
-        ip_top_bannerLayout.setHorizontalGroup(
-            ip_top_bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        ip_top_bannerLayout.setVerticalGroup(
-            ip_top_bannerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        txt_info.setText(resourceMap.getString("txt_info.text")); // NOI18N
-        txt_info.setName("txt_info"); // NOI18N
+        txt_username.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_usernameKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_usernameKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel_topLayout = new javax.swing.GroupLayout(panel_top);
         panel_top.setLayout(panel_topLayout);
@@ -298,33 +346,55 @@ public class STGLauncherView extends FrameView {
             panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_topLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ip_top_banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_info)
+                .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_topLayout.createSequentialGroup()
-                        .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_patch, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_notice)
-                    .addComponent(pbar_download, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panel_stages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panel_topLayout.createSequentialGroup()
+                            .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ip_top_banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panel_topLayout.createSequentialGroup()
+                                    .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(pbar_download, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_topLayout.createSequentialGroup()
+                                            .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btn_patch, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGap(399, 399, 399)))
+                            .addGap(36, 36, 36))
+                        .addGroup(panel_topLayout.createSequentialGroup()
+                            .addComponent(txt_notice)
+                            .addContainerGap(943, Short.MAX_VALUE))
+                        .addGroup(panel_topLayout.createSequentialGroup()
+                            .addComponent(txt_info)
+                            .addContainerGap(943, Short.MAX_VALUE)))))
         );
         panel_topLayout.setVerticalGroup(
             panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_topLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ip_top_banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panel_topLayout.createSequentialGroup()
                 .addComponent(txt_notice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_patch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ip_top_banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_start, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_patch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panel_topLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txt_info)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(pbar_download, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel_stages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1833, 1833, 1833))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -333,19 +403,15 @@ public class STGLauncherView extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel_stages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel_top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panel_top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel_top, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_stages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel_top, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -1308,6 +1374,53 @@ private void btn_delete_stageMousePressed(java.awt.event.MouseEvent evt) {//GEN-
 // TODO add your handling code here:
 }//GEN-LAST:event_btn_delete_stageMousePressed
 
+private void txt_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyTyped
+
+}//GEN-LAST:event_txt_usernameKeyTyped
+
+private void txt_usernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usernameKeyReleased
+    try {
+        //Update config in memory
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document config_doc = docBuilder.parse (new File("config.xml"));
+        config_doc.getDocumentElement ().normalize ();
+        
+        NodeList user_node_list = config_doc.getElementsByTagName("User");
+        Element user_element = (Element)user_node_list.item(0);
+        user_element.setAttribute("name", txt_username.getText());
+        
+        //Save it to the file
+        OutputFormat format = new OutputFormat(config_doc);
+        format.setIndenting(true);
+        XMLSerializer serializer;
+        serializer = new XMLSerializer(new FileOutputStream(new File("config.xml")), format);
+        serializer.serialize(config_doc);
+    } catch (FileNotFoundException ex) {
+        
+    } catch (IOException ex) {
+     
+    }catch (SAXParseException err) {
+        System.out.println ("** Parsing error" + ", line " 
+             + err.getLineNumber () + ", uri " + err.getSystemId ());
+        System.out.println(" " + err.getMessage ());
+
+    }catch (SAXException e) {
+        Exception x = e.getException ();
+        ((x == null) ? e : x).printStackTrace ();
+    }catch (Throwable t) {
+        t.printStackTrace ();
+    }
+}//GEN-LAST:event_txt_usernameKeyReleased
+
+private void txt_usernamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txt_usernamePropertyChange
+
+}//GEN-LAST:event_txt_usernamePropertyChange
+
+private void txt_usernameInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txt_usernameInputMethodTextChanged
+
+}//GEN-LAST:event_txt_usernameInputMethodTextChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_delete_stage;
     private javax.swing.JButton btn_download_stage;
@@ -1317,6 +1430,7 @@ private void btn_delete_stageMousePressed(java.awt.event.MouseEvent evt) {//GEN-
     private javax.swing.JPanel ip_stage_preview;
     private javax.swing.JPanel ip_top_banner;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList list_stages;
     private javax.swing.JPanel mainPanel;
@@ -1326,6 +1440,7 @@ private void btn_delete_stageMousePressed(java.awt.event.MouseEvent evt) {//GEN-
     private javax.swing.JProgressBar pbar_download;
     private javax.swing.JLabel txt_info;
     private javax.swing.JLabel txt_notice;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
