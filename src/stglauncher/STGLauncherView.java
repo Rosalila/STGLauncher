@@ -231,12 +231,13 @@ public class STGLauncherView extends FrameView {
         jScrollPane1.setViewportView(list_stages);
 
         ip_stage_preview.setName("ip_stage_preview"); // NOI18N
+        ip_stage_preview.setPreferredSize(new java.awt.Dimension(435, 250));
 
         javax.swing.GroupLayout ip_stage_previewLayout = new javax.swing.GroupLayout(ip_stage_preview);
         ip_stage_preview.setLayout(ip_stage_previewLayout);
         ip_stage_previewLayout.setHorizontalGroup(
             ip_stage_previewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 302, Short.MAX_VALUE)
+            .addGap(0, 435, Short.MAX_VALUE)
         );
         ip_stage_previewLayout.setVerticalGroup(
             ip_stage_previewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,7 +293,7 @@ public class STGLauncherView extends FrameView {
                             .addGroup(panel_stagesLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(ip_stage_preview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panel_stagesLayout.setVerticalGroup(
             panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,14 +301,14 @@ public class STGLauncherView extends FrameView {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_stagesLayout.createSequentialGroup()
                         .addGroup(panel_stagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_download_stage)
                             .addComponent(btn_update_stage)
                             .addComponent(btn_delete_stage))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ip_stage_preview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ip_stage_preview, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -347,24 +348,18 @@ public class STGLauncherView extends FrameView {
             .addGroup(panel_topLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_topLayout.createSequentialGroup()
-                        .addComponent(panel_stages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panel_topLayout.createSequentialGroup()
                             .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ip_top_banner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(panel_topLayout.createSequentialGroup()
-                                    .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(pbar_download, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_topLayout.createSequentialGroup()
-                                            .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btn_patch, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btn_patch, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(399, 399, 399)))
                             .addGap(36, 36, 36))
                         .addGroup(panel_topLayout.createSequentialGroup()
@@ -372,7 +367,12 @@ public class STGLauncherView extends FrameView {
                             .addContainerGap(943, Short.MAX_VALUE))
                         .addGroup(panel_topLayout.createSequentialGroup()
                             .addComponent(txt_info)
-                            .addContainerGap(943, Short.MAX_VALUE)))))
+                            .addContainerGap(943, Short.MAX_VALUE)))
+                    .addGroup(panel_topLayout.createSequentialGroup()
+                        .addGroup(panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pbar_download, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panel_stages, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         panel_topLayout.setVerticalGroup(
             panel_topLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
